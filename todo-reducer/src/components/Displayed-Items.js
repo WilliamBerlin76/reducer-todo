@@ -9,6 +9,7 @@ const ItemList = () => {
     const handleChanges = e => {
         setNewItem(e.target.value)
     }
+    
     return (
       <div>
            <>
@@ -27,7 +28,11 @@ const ItemList = () => {
           {itemsList.map(i => {
               console.log(itemsList)
               return(
-                  <p>{i.item}</p>
+                  <p className='item-list' key={i.id} 
+                  onClick={() => {
+                      dispatch({type: 'TOGGLE_COMPLETED'})
+                      
+                    }}>{i.item}</p>
               )
           })}
       </div>  
