@@ -1,8 +1,11 @@
 export const initialState = {
-    item: 'Learn about reducers',
-    completed: false,
-    id: 3892987589,
-    itemsList: []
+    todos: [
+        {
+        item: 'Learn about reducers',
+        completed: false,
+        id: 3892987589,
+        }
+    ]    
 }
 
 export const reducer = (state, action) => {
@@ -13,23 +16,17 @@ export const reducer = (state, action) => {
                 completed: false,
                 id: Date.now()
             };
-            return {
+            return{ 
                 ...state,
-                itemsList: [...state.itemsList, newItem]
-            };
+                todos: [...state.todos, newItem]
+            }
         case 'TOGGLE_COMPLETED':
-            return( 
-                state.map(item => {
-                    if (item.id === action.payload){
-                return{
+            return(state.todos.map(item => {
+                return {
                     ...item,
                     completed: !item.completed
                 }
-            } else {
-                return item
-            }
-            })
-          )
+            }))
         default:
             return state;
     }
