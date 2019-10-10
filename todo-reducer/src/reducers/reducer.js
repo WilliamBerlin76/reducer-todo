@@ -16,28 +16,38 @@ export const reducer = (state, action) => {
                 completed: false,
                 id: Date.now()
             };
-            return{ 
+            return { 
                 ...state,
                 todos: [...state.todos, newItem]
             }
         case 'TOGGLE_COMPLETED':
-            return(state.todos.map(i => {
-                console.log(state)
-                if (i.id === action.payload){
-                    console.log('item found')
-                    console.log(i.completed)
-                    return {
-                        ...i,
-                        completed: !i.completed
-                    }
-                } else {
-                    return i;
-                }
-            }))
-            // return{
-            //     ...state,
-            //     todos: {completed: !completed}
-            // }
+            return {
+                ...state,
+                todos: (state.todos.map(i => {
+                        if (i.id === action.payload){
+                            return {
+                                ...i,
+                                completed: !i.completed
+                            }
+                        } else {
+                            return i;
+                        }
+                    }))
+            }
+            // return(state.todos.map(i => {
+            //     console.log(state)
+            //     if (i.id === action.payload){
+            //         console.log('item found')
+            //         console.log(i.completed)
+            //         return {
+            //             ...i,
+            //             completed: !i.completed
+            //         }
+            //     } else {
+            //         return i;
+            //     }
+            // }))
+
         default:
             return state;
     }
